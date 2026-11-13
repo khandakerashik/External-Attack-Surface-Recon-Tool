@@ -1,0 +1,63 @@
+# easm-recon configuration (bash syntax). Copy to config/easm.conf or pass with -c FILE.
+# CLI flags override these values. Profiles (--profile quick|standard|deep) are applied
+# first, then this file, then CLI flags.
+
+# ---------------------------------------------------------------- passive discovery
+SUBFINDER_ALL=1                 # use all subfinder sources (slower, broader)
+SUBFINDER_PROVIDER_CONFIG=""    # e.g. ~/.config/subfinder/provider-config.yaml (API keys = much better coverage)
+ENABLE_AMASS=1
+AMASS_TIMEOUT_MIN=15
+ENABLE_ARCHIVES=1               # gau / waybackurls historical URLs
+GAU_THREADS=3
+ARCHIVE_TIMEOUT=1800
+ENABLE_WHOIS=1
+CERTSPOTTER_API_KEY=""          # optional, raises Cert Spotter rate limits
+PASSIVE_TOOL_TIMEOUT=2400       # per-tool cap, seconds
+
+# DNS
+DNSX_RATE=50                    # queries/sec to public resolvers
+RESOLVERS_FILE=""               # optional trusted resolver list for dnsx
+DNS_RESOLVER=""                 # optional single resolver for dig posture checks (e.g. 1.1.1.1)
+DNS_WORDLIST=""                 # set to enable brute force (or use --dns-brute FILE)
+ENABLE_PERMUTATIONS=0           # alterx permutations (+ dnsx); noisy, off by default
+PERMUTATION_LIMIT=20000
+
+# Enrichment / intel
+ENABLE_INTERNETDB=1             # Shodan InternetDB: passive ports/CPEs/CVEs (no key, CDN IPs skipped)
+INTERNETDB_MAX_IPS=750
+OFFLINE_INTEL=0                 # 1 = use cached NVD/KEV/EPSS/InternetDB only
+ENABLE_CVE_MAPPING=1
+# export NVD_API_KEY=...        # strongly recommended: 10x faster NVD queries (free key)
+
+# ---------------------------------------------------------------- active (authorised only)
+ENABLE_AXFR=1                   # zone-transfer test, only for roots present in the allowlist
+TOP_PORTS=1000                  # 100 | 1000 | full
+NAABU_RATE=150                  # packets/sec
+NMAP_MAX_RATE=100
+PORTSCAN_TIMEOUT=7200
+ENABLE_SERVICE_DETECTION=1
+NMAP_VERSION_INTENSITY=7
+NMAP_HOST_TIMEOUT_SEC=900
+HTTPX_RATE=5                    # requests/sec
+HTTPX_THREADS=10
+HTTP_TIMEOUT=3600
+ENABLE_WEB_INVENTORY=1          # httpx CSV inventory of approved hosts -> findings/web-assets.csv
+WEB_INVENTORY_RATE=2            # requests/sec
+WEB_INVENTORY_THREADS=2
+ENABLE_TLS=1
+TLS_WORKERS=4
+ENABLE_CRAWL=0                  # katana crawling
+KATANA_DEPTH=2
+KATANA_RATE=5
+CRAWL_TIMEOUT=3600
+ENABLE_NUCLEI=1
+NUCLEI_RATE=10                  # requests/sec
+NUCLEI_CONCURRENCY=5
+NUCLEI_BULK=10
+NUCLEI_SEVERITY="low,medium,high,critical"
+NUCLEI_EXCLUDE_TAGS="dos,fuzz,fuzzing,intrusive,bruteforce,brute-force,default-login,osint,headless"
+NUCLEI_TEMPLATES=""             # optional custom template dir/file
+NUCLEI_TIMEOUT=10800
+
+# ---------------------------------------------------------------- reporting
+REPORT_TITLE="External Attack Surface & Vulnerability Report"

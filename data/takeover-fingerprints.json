@@ -1,0 +1,30 @@
+{
+  "_comment": "Subdomain-takeover fingerprints (based on community research such as EdOverflow/can-i-take-over-xyz). 'cname' are regexes matched against CNAME targets. 'nxdomain' = a dangling CNAME whose target does not resolve is a strong takeover signal. 'http' = body fingerprint confirming an unclaimed resource. Always validate manually before reporting.",
+  "services": [
+    {"service": "AWS S3", "cname": ["\\.s3[.-]([a-z0-9-]+\\.)?amazonaws\\.com$", "\\.s3-website[.-]"], "nxdomain": false, "http": ["NoSuchBucket", "The specified bucket does not exist"]},
+    {"service": "AWS Elastic Beanstalk", "cname": ["\\.elasticbeanstalk\\.com$"], "nxdomain": true, "http": []},
+    {"service": "Microsoft Azure", "cname": ["\\.cloudapp\\.net$", "\\.cloudapp\\.azure\\.com$", "\\.azurewebsites\\.net$", "\\.blob\\.core\\.windows\\.net$", "\\.trafficmanager\\.net$", "\\.azureedge\\.net$", "\\.azure-api\\.net$", "\\.azurecontainer\\.io$", "\\.azurefd\\.net$", "\\.azurestaticapps\\.net$"], "nxdomain": true, "http": ["404 Web Site not found"]},
+    {"service": "GitHub Pages", "cname": ["\\.github\\.io$"], "nxdomain": false, "http": ["There isn't a GitHub Pages site here."]},
+    {"service": "Heroku", "cname": ["\\.herokuapp\\.com$", "\\.herokudns\\.com$", "\\.herokussl\\.com$"], "nxdomain": true, "http": ["No such app", "herokucdn.com/error-pages/no-such-app.html"]},
+    {"service": "Shopify", "cname": ["\\.myshopify\\.com$"], "nxdomain": false, "http": ["Sorry, this shop is currently unavailable.", "Only one step left!"]},
+    {"service": "Fastly", "cname": ["\\.fastly\\.net$"], "nxdomain": false, "http": ["Fastly error: unknown domain"]},
+    {"service": "Pantheon", "cname": ["\\.pantheonsite\\.io$"], "nxdomain": false, "http": ["The gods are wise, but do not know of the site which you seek."]},
+    {"service": "Tumblr", "cname": ["domains\\.tumblr\\.com$"], "nxdomain": false, "http": ["Whatever you were looking for doesn't currently exist at this address."]},
+    {"service": "Bitbucket", "cname": ["\\.bitbucket\\.io$"], "nxdomain": false, "http": ["Repository not found"]},
+    {"service": "Zendesk", "cname": ["\\.zendesk\\.com$"], "nxdomain": false, "http": ["Help Center Closed"]},
+    {"service": "Surge.sh", "cname": ["\\.surge\\.sh$"], "nxdomain": false, "http": ["project not found"]},
+    {"service": "Ghost", "cname": ["\\.ghost\\.io$"], "nxdomain": false, "http": ["Failed to resolve DNS path for this host", "The thing you were looking for is no longer here"]},
+    {"service": "ReadMe.io", "cname": ["\\.readme\\.io$"], "nxdomain": false, "http": ["Project doesnt exist... yet!"]},
+    {"service": "Help Scout", "cname": ["\\.helpscoutdocs\\.com$"], "nxdomain": false, "http": ["No settings were found for this company:"]},
+    {"service": "Agile CRM", "cname": ["\\.agilecrm\\.com$"], "nxdomain": false, "http": ["Sorry, this page is no longer available."]},
+    {"service": "Strikingly", "cname": ["\\.s\\.strikinglydns\\.com$"], "nxdomain": false, "http": ["PAGE NOT FOUND."]},
+    {"service": "Uptimerobot", "cname": ["stats\\.uptimerobot\\.com$"], "nxdomain": false, "http": ["page not found"]},
+    {"service": "Webflow", "cname": ["proxy\\.webflow\\.com$", "proxy-ssl\\.webflow\\.com$"], "nxdomain": false, "http": ["The page you are looking for doesn't exist or has been moved."]},
+    {"service": "WordPress.com", "cname": ["\\.wordpress\\.com$"], "nxdomain": false, "http": ["Do you want to register"]},
+    {"service": "Google Cloud Storage", "cname": ["c\\.storage\\.googleapis\\.com$"], "nxdomain": false, "http": ["The specified bucket does not exist", "NoSuchBucket"]},
+    {"service": "Netlify", "cname": ["\\.netlify\\.app$", "\\.netlify\\.com$"], "nxdomain": false, "http": ["Not Found - Request ID:"]},
+    {"service": "Cargo Collective", "cname": ["\\.cargocollective\\.com$"], "nxdomain": false, "http": ["404 Not Found"]},
+    {"service": "Campaign Monitor", "cname": ["createsend\\.com$"], "nxdomain": false, "http": ["Trying to access your account?"]},
+    {"service": "Unbounce", "cname": ["unbouncepages\\.com$"], "nxdomain": false, "http": ["The requested URL was not found on this server."]}
+  ]
+}

@@ -1,0 +1,13 @@
+# Scan output - contains sensitive target data, never commit
+easm_*/
+osint-recon_*/
+*.jsonl
+tests/fixtures/
+
+# Local config with API keys
+config/easm.conf
+.env
+
+# Python
+__pycache__/
+*.pyc
